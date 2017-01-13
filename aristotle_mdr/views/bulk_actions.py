@@ -128,9 +128,9 @@ def get_bulk_actions():
 
             # We need to make this a dictionary, not a class as otherwise
             # the template engire tries to instantiate it.
-            frm = {'form': f}
+            frm = {'form': form}
             for prop in ['classes', 'can_use', 'text']:
-                frm[prop] = getattr(f, prop, None)
+                frm[prop] = getattr(form, prop, None)
             actions[action_name] = frm
         # Save to method to prevent having to reimport everytime
         get_bulk_actions.actions = actions
