@@ -11,15 +11,23 @@
         {# Fixes to load and init scripts dynamically on bootstrap modals #}
         <script>
         $(function() {
-            // Load autocomplete script with jquery for compatibility
-            $.ajax({
-              url: "{% static 'autocomplete_light/autocomplete.init.js' %}",
-              dataType: "script"
-            });
-            // Trigger DOMContentLoaded event
-            var DOMContentLoaded_event = document.createEvent("Event")
-            DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true)
-            window.document.dispatchEvent(DOMContentLoaded_event);
+            // Wait for modal to load and then init required libraries
+            var checkExist = setInterval(function() {
+               if ($('.modal-dialog form').length) {
+                    // Load autocomplete script with jquery for compatibility
+                    $.ajax({
+                      url: "{% static 'autocomplete_light/autocomplete.init.js' %}",
+                      dataType: "script"
+                    });
+                    // Trigger DOMContentLoaded event
+                    var DOMContentLoaded_event = document.createEvent("Event")
+                    DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true)
+                    window.document.dispatchEvent(DOMContentLoaded_event);
+                    console.log("Loaded!");
+                    clearInterval(checkExist);
+               }
+            }, 100);
+
         });
         </script>
     {% endif %}
