@@ -1,4 +1,4 @@
-{% load aristotle_tags i18n %}
+{% load aristotle_tags i18n static %}
 
 {# FIXME: this is a hotfix for a js error that happens on modal windows where ckeditor is not loaded #}
 {% if item|can_edit:request.user %}
