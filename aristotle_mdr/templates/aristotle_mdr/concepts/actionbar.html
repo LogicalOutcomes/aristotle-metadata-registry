@@ -1,5 +1,11 @@
 {% load aristotle_tags i18n %}
 
+{# FIXME: this is a hotfix for a js error that happens on modal windows where ckeditor is not loaded #}
+{% if item|can_edit:request.user %}
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endif %}
+{# FIXME: please fix and remove the previous code when fix or migrate to a newer version of Aristotle #}
+
 <div class="btn-group pull-right">
     {% if user.is_active %}
         {% include "aristotle_mdr/helpers/favourite_concept.html" %}
